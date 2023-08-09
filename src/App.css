@@ -1,38 +1,98 @@
-.App {
-  text-align: center;
+*{
+  margin: 0;
+  padding: 0;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+ul,li{
+  list-style: none;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.tab-menu{
+  width: 100%;
+  height: 70px;
+  border-top: 1px solid #000;
+  box-sizing: border-box;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.tab-menu .menu{
+  cursor: pointer;
   display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 5px;
+
+}
+.tab-menu .menu span{
+  font-size: 17px;
+}
+.tab-menu .menu.action{
+  color: #76b7e7;
+}
+.tab-menu .menu i{
+  display: block;
+  width: 30px;
+  height: 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  /* background-image: url(./images/favorites.png); */
+}
+.tab-menu .my-map i{
+  background-image: url(./images/maps.png);
+  
+}
+.tab-menu .entire-map i{
+  background-image: url(./images/map.png);
+  
+}
+.tab-menu .favorites i{
+  background-image: url(./images/on.png);
+  
+}
+ .item-header{
+  display: flex;
+  align-items: center;
+    justify-content: space-between;
+}
+ .item-header .sub{
+  margin-right: 3px;
+  font-size: 25px;
+  font-weight: 600;
+}
+ .item-header .main{
+  margin-right: 5px;
+  font-weight: 400;
+  font-size: 17px;
+}
+ .item-header span{
+  color: #fff;
+}
+ .item-header i.off{
+  background-image: url(./images/off.png);
+}
+.item-header i.on{
+  background-image: url(./images/on.png);
+}
+.show{
+  height: calc(100vh - 70px);
+  overflow-y: auto;
+  display: block;
+}
+.none{
+  display: none;
+}
+.item-container{
+  display: flex;
+  row-gap: 5px;
+  margin: 20px 0;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.tryWrap{
+  padding-top: 20px;
+    box-sizing: border-box;
 }
