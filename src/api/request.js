@@ -1,10 +1,10 @@
-const requests ={
-    serviceKey:'knxz%2FlyNk0FjzlTCfJjZUPUucLIHmodcfjVN4xS%2FjYX76aaGg8%2FmSWhc1v5iXk4VfTLty9gPewCNeVL83HHlEg%3D%3D',
-    returnType:'json',
-    numOfRows:'100',
-    sidoName: '서울',
-    pageNo:'1',
-    ver:'1.0'
+// const requests ={
+//     serviceKey:'knxz%2FlyNk0FjzlTCfJjZUPUucLIHmodcfjVN4xS%2FjYX76aaGg8%2FmSWhc1v5iXk4VfTLty9gPewCNeVL83HHlEg%3D%3D',
+//     returnType:'json',
+//     numOfRows:'100',
+//     sidoName: '서울',
+//     pageNo:'1',
+//     ver:'1.0'
     
     // fetchNowPlaying: "movie/now_playing",
     // fetchTrending: "/trending/all/week",
@@ -15,5 +15,5 @@ const requests ={
     // fetchRomanceMovies: "/discover/movie?with_genres=10749",
     // fetchDocumentaries: "/discover/movie?with_genres=99"
     
-}
-export default requests;
+// }
+// export default requests;
