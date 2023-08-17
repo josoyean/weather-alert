@@ -5,7 +5,7 @@ import City from "./City";
 const URL = "/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty";
 function App() {
   const [menu, setMenu] = useState(2);
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState();
   const [apiData, setApiData] = useState([]);
   const tabClick = (i) => {
     setMenu(i);
@@ -62,26 +62,38 @@ const nowYear=String(now.getFullYear());
 const nowMonth=String(now.getMonth()+1).padStart(2,"0");
 const nowDay=String(now.getDate()).padStart(2,"0");
 const nowDate=nowYear+nowMonth+nowDay;
-console.log(nowYear+nowMonth+nowDay)
+const nowHours = String(now.getHours())>=10 ? now.getHours()+'00' : '0'+now.getHours() +'00'
+console.log(String(nowHours))
 
 const fetchDataTest = async()=>{
   const json = await(
     await fetch(
-      `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=knxz%2FlyNk0FjzlTCfJjZUPUucLIHmodcfjVN4xS%2FjYX76aaGg8%2FmSWhc1v5iXk4VfTLty9gPewCNeVL83HHlEg%3D%3D&pageNo=1&numOfRows=1000&dataType=JSON&base_date=20230815&base_time=0500&nx=62&ny=127`
+      `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=knxz%2FlyNk0FjzlTCfJjZUPUucLIHmodcfjVN4xS%2FjYX76aaGg8%2FmSWhc1v5iXk4VfTLty9gPewCNeVL83HHlEg%3D%3D&pageNo=1&numOfRows=1000&dataType=JSON&base_date=${nowDate}&base_time=0500&nx=62&ny=127`
       // `https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMinuDustFrcstDspth?serviceKey=knxz%2FlyNk0FjzlTCfJjZUPUucLIHmodcfjVN4xS%2FjYX76aaGg8%2FmSWhc1v5iXk4VfTLty9gPewCNeVL83HHlEg%3D%3D&returnType=json&numOfRows=100&pageNo=1&ver=1.0`
     )
     ).json();
-    console.log(json.response.body)
-    // setApiData(json.data.movies)
+    setApiData(json.response.body.items.item)
   
 }
 
+console.log(apiData)
    useEffect(()=>{
-    // fetchData()
+  
     fetchDataTest()
 
    },[])
 
+   const rendering = ()=> {
+    const result = [];
+      for (let index = 0; index < apiData.length; index+=12) {
+        result.push(apiData.slice(index,index+12))
+        }
+        console.log(result)
+        // setPosts(result)
+        return
+}
+
+      // console.log(posts)
   return (
     <div className="App">
       <div className="contents">
@@ -95,12 +107,16 @@ const fetchDataTest = async()=>{
         </div>
         <div className={menu === 2 ? "show" : "none"}>
           <ul className="tryWrap">
-            {apiData.map((item,index) => {
+            {/* {apiData.map((item,index) => {
               return (
                 <City key={index}  sidoName={item.sidoName} dataTime={item.dataTime} stationName={item.stationName} pm10Grade={item.pm10Grade} pm10Value={item.pm10Value}
                 ></City>
               );
-            })}
+            })} */}
+
+          {
+            rendering()
+          }
           </ul>
         </div>
         <div className={menu === 3 ? "show" : "none"}>
