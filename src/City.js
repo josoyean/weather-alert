@@ -1,44 +1,35 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-function City({ stationName, sidoName, pm10Grade, pm10Value,dataTime }) {
+function City({fcstValue }) {
   const [isClick,setIsClick]=useState(false)
+console.log('fcstValue',fcstValue)
+ 
 
-  const gradeItem = ["좋음", "보통", "한때나쁨", "나쁨", "매우나쁨"];
-  const grade = (gradeText) => {
-    let gradeName = "";
-
-    if (gradeText === undefined || gradeText === "-") {
-      gradeName = "알수없음";
-    } else {
-      gradeName = gradeText;
-    }
-    return gradeName;
-  };
-
-  const iconClick=()=>{
-    
-        if(isClick){
-           setIsClick(false)
-        }else{
-            setIsClick(true)
-        }
-  }
+  // const iconClick=()=>{
+  //       if(isClick){
+  //          setIsClick(false)
+  //       }else{
+  //           setIsClick(true)
+  //       }
+  // }
   return (
     <CityItem>
       <div className="item-header">
         <div className="city-name">
-          <span className="sub">{sidoName}</span>{" "}
-          <span className="main">{stationName}</span>
+          <span className="sub"></span>{" "}
+          <span className="main"></span>
         </div>
         <Favorites 
-        onClick={iconClick}
-        className={isClick?'on':'off'} ></Favorites>
+        // onClick={iconClick}
+        className={isClick?'on':'off'}>
+
+        </Favorites>
       </div>
       <div className="item-container">
-        <Grade>{grade(gradeItem[pm10Grade - 1])}</Grade>
-        <Pm10Value>미세먼지 수치 : {grade(pm10Value)}</Pm10Value>
-        <Time>({dataTime} 기준)</Time>
-        {/* <span>미세먼지 수치 : {grade(pm10Value)}</span> */}
+        <Grade></Grade>
+        <Pm10Value></Pm10Value>
+        <Time></Time>
+        <span></span>
       </div>
     </CityItem>
   );

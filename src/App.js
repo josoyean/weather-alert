@@ -5,7 +5,7 @@ import City from "./City";
 const URL = "/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty";
 function App() {
   const [menu, setMenu] = useState(2);
-  const [posts, setPosts] = useState();
+  const [posts, setPosts] = useState(0);
   const [apiData, setApiData] = useState([]);
   const tabClick = (i) => {
     setMenu(i);
@@ -60,10 +60,10 @@ function App() {
 const now =new Date();
 const nowYear=String(now.getFullYear());
 const nowMonth=String(now.getMonth()+1).padStart(2,"0");
-const nowDay=String(now.getDate()).padStart(2,"0");
+const nowDay=String(now.getDate()-1).padStart(2,"0");
 const nowDate=nowYear+nowMonth+nowDay;
 const nowHours = String(now.getHours())>=10 ? now.getHours()+'00' : '0'+now.getHours() +'00'
-console.log(String(nowHours))
+// console.log(nowHours)
 
 const fetchDataTest = async()=>{
   const json = await(
@@ -73,50 +73,41 @@ const fetchDataTest = async()=>{
     )
     ).json();
     setApiData(json.response.body.items.item)
+  //  console.log(json.response)
   
 }
 
-console.log(apiData)
-   useEffect(()=>{
-  
-    fetchDataTest()
-
-   },[])
-
-   const rendering = ()=> {
-    const result = [];
-      for (let index = 0; index < apiData.length; index+=12) {
-        result.push(apiData.slice(index,index+12))
-        }
-        console.log(result)
-        // setPosts(result)
-        return
+useEffect(()=>{
+  fetchDataTest()
+},[])
+const fetchData = () => {
+  return <City key={1} fcstValue={apiData[posts * 12].fcstValue}></City>
 }
 
-      // console.log(posts)
+useEffect(()=>{
+  // fetchData()
+  console.log(apiData[posts * 12].fcstValue)
+  
+   },[apiData])
   return (
     <div className="App">
       <div className="contents">
         <div className={menu === 1 ? "show" : "none"}>
         {apiData.map((item,index) => {
-              return (
-                <City  key={index}  sidoName={item.sidoName} dataTime={item.dataTime} stationName={item.stationName} pm10Grade={item.pm10Grade} pm10Value={item.pm10Value}
-                ></City>
-              );
+              // return (
+                // <City key={index}></City>
+              // );
             })}
         </div>
         <div className={menu === 2 ? "show" : "none"}>
           <ul className="tryWrap">
-            {/* {apiData.map((item,index) => {
-              return (
-                <City key={index}  sidoName={item.sidoName} dataTime={item.dataTime} stationName={item.stationName} pm10Grade={item.pm10Grade} pm10Value={item.pm10Value}
-                ></City>
-              );
-            })} */}
-
-          {
-            rendering()
-          }
+        
+            { 
+            // fetchData()
+            // <City key={1} fcstValue={apiData[posts * 12].fcstValue}></City>
+            // <City key={1} TMP={apiData[posts * 12]}></City>
+            }
+        
           </ul>
         </div>
         <div className={menu === 3 ? "show" : "none"}>
