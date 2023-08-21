@@ -1,17 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-function City({fcstValue }) {
+function City({fcstValue}) {
   const [isClick,setIsClick]=useState(false)
 console.log('fcstValue',fcstValue)
  
-
-  // const iconClick=()=>{
-  //       if(isClick){
-  //          setIsClick(false)
-  //       }else{
-  //           setIsClick(true)
-  //       }
-  // }
   return (
     <CityItem>
       <div className="item-header">
@@ -19,9 +11,7 @@ console.log('fcstValue',fcstValue)
           <span className="sub"></span>{" "}
           <span className="main"></span>
         </div>
-        <Favorites 
-        // onClick={iconClick}
-        className={isClick?'on':'off'}>
+        <Favorites className={isClick?'on':'off'}>
 
         </Favorites>
       </div>

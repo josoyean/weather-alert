@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-
 import "./App.css";
-import City from "./City";
+import City from './City';
 const URL = "/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty";
 function App() {
   const [menu, setMenu] = useState(2);
@@ -80,15 +79,16 @@ const fetchDataTest = async()=>{
 useEffect(()=>{
   fetchDataTest()
 },[])
+
 const fetchData = () => {
   return <City key={1} fcstValue={apiData[posts * 12].fcstValue}></City>
 }
 
-useEffect(()=>{
+// useEffect(()=>{
   // fetchData()
-  console.log(apiData[posts * 12].fcstValue)
-  
-   },[apiData])
+  // console.log(apiData[posts * 12])
+  //  },[apiData])
+
   return (
     <div className="App">
       <div className="contents">
@@ -103,6 +103,9 @@ useEffect(()=>{
           <ul className="tryWrap">
         
             { 
+            useEffect(()=>{
+              fetchData()
+            },[])
             // fetchData()
             // <City key={1} fcstValue={apiData[posts * 12].fcstValue}></City>
             // <City key={1} TMP={apiData[posts * 12]}></City>
