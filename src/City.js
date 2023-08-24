@@ -1,6 +1,18 @@
 import React from "react";
 import styled from "styled-components";
-function City({fcstValue,uuuValue,rehValue,pcpValue,popValue,menu}) {
+function City({skyValue, fcstValue,uuuValue,rehValue,pcpValue,popValue,menu}) {
+
+  const iconName = (skyValue)=>{
+    let skyName = '';
+    if(skyValue === '1'){
+      skyName = 'sun';
+    }else if(skyValue === '3'){
+      skyName = 'clouds';
+    }else if(skyValue === '4'){
+      skyName = 'cloudy';
+    }
+    return skyName;
+  }
 
   return (
     <CityItem>
@@ -12,14 +24,18 @@ function City({fcstValue,uuuValue,rehValue,pcpValue,popValue,menu}) {
         </div>
       </div>
       <div className="item-container">
-        <i className="item-icon"></i>
+        <i className={iconName(skyValue) }></i>
         <Grade>{fcstValue} ℃</Grade>
       </div>
       <div className="item-wrap">
-        <Pop>{popValue}%</Pop>
-        <Pcp>{pcpValue}mm</Pcp>
-        <Reh>{rehValue}%</Reh>
-        <Uuu>{uuuValue}m/s</Uuu>
+        <Pop><em>강수 확률</em>
+        <span>
+        {popValue}%
+        </span>
+        </Pop>
+        <Pcp><em>강수량</em>{pcpValue}</Pcp>
+        <Reh><em>습도</em>{rehValue}%</Reh>
+        <Uuu><em>풍속</em>{uuuValue}m/s</Uuu>
         </div>
     </CityItem>
   );
@@ -49,7 +65,6 @@ const Favorites = styled.i`
   /* background-image: url(./images/favorites.png); */
 `;
 const Grade = styled.span`
-  width: 150px;
   box-sizing: border-box;
   font-size: 30px;
   font-weight: bolder;

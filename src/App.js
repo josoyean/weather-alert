@@ -34,12 +34,12 @@ useEffect(()=>{
 },[])
 
 useEffect(()=>{
-//  console.log(apiData[posts * 12 + 1].fcstValue)
+//  console.log(apiData[posts * 12 + 5].fcstValue)
 },[apiData])
 
 const fetchData = () => {
   return(
-    <City key={1} fcstValue={apiData[posts * 12].fcstValue} uuuValue={apiData[posts * 12 + 1].fcstValue} popValue={apiData[posts * 12 + 7].fcstValue} pcpValue={apiData[posts * 12 + 9].fcstValue} rehValue={apiData[posts * 12 + 10].fcstValue} menu={menu}></City>
+    <City key={1} fcstValue={apiData[posts * 12].fcstValue} uuuValue={apiData[posts * 12 + 1].fcstValue} popValue={apiData[posts * 12 + 7].fcstValue} pcpValue={apiData[posts * 12 + 9].fcstValue} rehValue={apiData[posts * 12 + 10].fcstValue} menu={menu} skyValue={apiData[posts * 12 + 5].fcstValue}></City>
     )
 }
 
