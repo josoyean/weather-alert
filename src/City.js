@@ -1,26 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-function City({fcstValue}) {
-  const [isClick,setIsClick]=useState(false)
-console.log('fcstValue',fcstValue)
- 
+function City({fcstValue,uuuValue,rehValue,pcpValue,popValue,menu}) {
+
   return (
     <CityItem>
       <div className="item-header">
         <div className="city-name">
-          <span className="sub"></span>{" "}
-          <span className="main"></span>
+          <span className="main">{
+            menu === 1 ? '오늘' : menu === 2 ? '내일' : '모레'
+          } 날씨</span>
         </div>
-        <Favorites className={isClick?'on':'off'}>
-
-        </Favorites>
       </div>
       <div className="item-container">
-        <Grade></Grade>
-        <Pm10Value></Pm10Value>
-        <Time></Time>
-        <span></span>
+        <i className="item-icon"></i>
+        <Grade>{fcstValue} ℃</Grade>
       </div>
+      <div className="item-wrap">
+        <Pop>{popValue}%</Pop>
+        <Pcp>{pcpValue}mm</Pcp>
+        <Reh>{rehValue}%</Reh>
+        <Uuu>{uuuValue}m/s</Uuu>
+        </div>
     </CityItem>
   );
 }
@@ -29,13 +29,14 @@ export default City;
 
 const CityItem = styled.li`
   width: calc(100vw - 40px);
-  /* height: 100px; */
   padding: 10px;
   box-sizing: border-box;
   margin: 0 auto;
-  background-color: #76b7e7;
   margin-bottom: 20px;
   border-radius: 7px;
+  display: flex;
+    flex-direction: column;
+    row-gap: 20px;
 `;
 
 const Favorites = styled.i`
@@ -48,25 +49,27 @@ const Favorites = styled.i`
   /* background-image: url(./images/favorites.png); */
 `;
 const Grade = styled.span`
-  /* display: block; */
   width: 150px;
   box-sizing: border-box;
-  background-color: #fff;
   font-size: 30px;
   font-weight: bolder;
   border-radius: 5px;
-  color: #76b7e7;
+  color: #000;
   text-align: center;
-  padding: 20px;
-
-  /* background-image: url(./images/favorites.png); */
 `;
-const  Pm10Value= styled.span`
-color: #fff;
 
+const  Pcp= styled.span`
+color: #fff;
 `
 
-const Time = styled.span`
+const Reh = styled.span`
 color: #fff;
+`
 
+const Pop = styled.span`
+color: #fff;
+`
+
+const Uuu = styled.span`
+color: #fff;
 `

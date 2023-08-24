@@ -31,31 +31,12 @@ ul,li{
 .tab-menu .menu.action{
   color: #76b7e7;
 }
-.tab-menu .menu i{
-  display: block;
-  width: 30px;
-  height: 30px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100%;
-  /* background-image: url(./images/favorites.png); */
-}
-.tab-menu .my-map i{
-  background-image: url(./images/maps.png);
-  
-}
-.tab-menu .entire-map i{
-  background-image: url(./images/map.png);
-  
-}
-.tab-menu .favorites i{
-  background-image: url(./images/on.png);
-  
-}
+
+
  .item-header{
   display: flex;
   align-items: center;
-    justify-content: space-between;
+  justify-content: center;
 }
  .item-header .sub{
   margin-right: 3px;
@@ -68,7 +49,7 @@ ul,li{
   font-size: 17px;
 }
  .item-header span{
-  color: #fff;
+  color: #000;
 }
  .item-header i.off{
   background-image: url(./images/off.png);
@@ -87,12 +68,23 @@ ul,li{
 .item-container{
   display: flex;
   row-gap: 5px;
-  margin: 20px 0;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
+
 .tryWrap{
   padding-top: 20px;
     box-sizing: border-box;
+}
+.item-wrap{
+  display: flex;
+  width: -webkit-fill-available;
+  justify-content: space-between;
+}
+.item-wrap span{
+  display: block;
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: #76b7e7;
+  border-radius: 4px; 
 }
