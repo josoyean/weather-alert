@@ -16,13 +16,14 @@ function City({skyValue, fcstValue,uuuValue,rehValue,pcpValue,popValue,menu}) {
 
   return (
     <CityItem>
-      <div className="item-header">
+      {/* <div className="item-header">
         <div className="city-name">
           <span className="main">{
             menu === 1 ? '오늘' : menu === 2 ? '내일' : '모레'
           } 날씨</span>
         </div>
-      </div>
+      </div> */}
+      <div className="item-box">
       <div className="item-container">
         <i className={iconName(skyValue) }></i>
         <Grade>{fcstValue} ℃</Grade>
@@ -36,7 +37,8 @@ function City({skyValue, fcstValue,uuuValue,rehValue,pcpValue,popValue,menu}) {
         <Pcp><em>강수량</em>{pcpValue}</Pcp>
         <Reh><em>습도</em>{rehValue}%</Reh>
         <Uuu><em>풍속</em>{uuuValue}m/s</Uuu>
-        </div>
+      </div>
+      </div>
     </CityItem>
   );
 }
@@ -45,14 +47,12 @@ export default City;
 
 const CityItem = styled.li`
   width: calc(100vw - 40px);
-  padding: 10px;
   box-sizing: border-box;
   margin: 0 auto;
-  margin-bottom: 20px;
   border-radius: 7px;
   display: flex;
-    flex-direction: column;
-    row-gap: 20px;
+  flex-direction: column;
+  row-gap: 20px;
 `;
 
 const Favorites = styled.i`

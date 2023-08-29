@@ -34,6 +34,7 @@ li {
 
 .item-header {
   display: flex;
+  margin-top: 30px;
   align-items: center;
   justify-content: center;
 }
@@ -45,7 +46,7 @@ li {
 .item-header .main {
   margin-right: 5px;
   font-weight: 400;
-  font-size: 17px;
+  font-size: 25px;
 }
 .item-header span {
   color: #000;
@@ -59,7 +60,7 @@ li {
 .show {
   height: calc(100vh - 70px);
   overflow-y: auto;
-  display: block;
+  position: relative;
 }
 .none {
   display: none;
@@ -74,14 +75,15 @@ li {
 }
 
 .tryWrap {
-  padding-top: 20px;
+  
   box-sizing: border-box;
 }
 .item-wrap {
+  margin-top: 45px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   width: -webkit-fill-available;
-  grid-column-gap: 10px;
+  grid-column-gap: 8px;
 }
 .item-wrap > span {
   display: block;
@@ -115,4 +117,11 @@ li {
 }
 .item-container > i.cloudy {
   background-image: url(./images/cloudy-4.png);
+}
+.item-box{
+  /* position: absolute; */
+  /* top: 50%; */
+  /* left: 50%; */
+  width: inherit;
+  /* transform: translate(-50%,-50%); */
 }
