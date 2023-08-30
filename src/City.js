@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-function City({skyValue, fcstValue,uuuValue,rehValue,pcpValue,popValue,menu}) {
+function City({skyValue, fcstValue,uuuValue,rehValue,pcpValue,popValue,fcstDate,fcstTime}) {
 
   const iconName = (skyValue)=>{
     let skyName = '';
@@ -38,6 +38,7 @@ function City({skyValue, fcstValue,uuuValue,rehValue,pcpValue,popValue,menu}) {
         <Reh><em>습도</em>{rehValue}%</Reh>
         <Uuu><em>풍속</em>{uuuValue}m/s</Uuu>
       </div>
+    
       </div>
     </CityItem>
   );
@@ -55,15 +56,6 @@ const CityItem = styled.li`
   row-gap: 20px;
 `;
 
-const Favorites = styled.i`
-  display: block;
-  width: 30px;
-  height: 30px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100%;
-  /* background-image: url(./images/favorites.png); */
-`;
 const Grade = styled.span`
   box-sizing: border-box;
   font-size: 30px;
