@@ -1,15 +1,26 @@
 import React from "react";
 import styled from "styled-components";
-function City({skyValue, fcstValue,uuuValue,rehValue,pcpValue,popValue,fcstDate,fcstTime}) {
+function City({skyValue, fcstValue,uuuValue,rehValue,pcpValue,popValue,ptyValue,fcstDate,fcstTime}) {
 
-  const iconName = (skyValue)=>{
+  const iconName = (skyValue,ptyValue)=>{
     let skyName = '';
     if(skyValue === '1'){
       skyName = 'sun';
     }else if(skyValue === '3'){
       skyName = 'clouds';
     }else if(skyValue === '4'){
-      skyName = 'cloudy';
+      if(ptyValue === '0'){
+        skyName = 'cloudy';
+      }else if(ptyValue === '1'){
+        skyName = 'rain';
+      }else if(ptyValue === '2'){
+        skyName = 'rain';
+      }else if(ptyValue === '3'){
+        skyName = 'snow';
+      }else if(ptyValue === '4'){
+        skyName = 'shower';
+      }
+ 
     }
     return skyName;
   }
@@ -25,7 +36,7 @@ function City({skyValue, fcstValue,uuuValue,rehValue,pcpValue,popValue,fcstDate,
       </div> */}
       <div className="item-box">
       <div className="item-container">
-        <i className={iconName(skyValue) }></i>
+        <i className={iconName(skyValue,ptyValue) }></i>
         <Grade>{fcstValue} ℃</Grade>
       </div>
       <div className="item-wrap">
