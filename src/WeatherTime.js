@@ -48,7 +48,7 @@ return diffDate
     iconName(cityNowSkyDate,cityNowPtyDate)
      }></i>
       <span className='dayDate'>{tmpValue}℃</span>
-      <span className='time'>{
+      <span className={ weatherIndex === 0 ? 'time now': fcstTime === '00' ?weatherIndex <= 12?'time tomorrow':'time afterTomorrow' : 'time'}>{
         weatherIndex === 0 ? '현재': fcstTime === '00' ?weatherIndex <= 12?'내일':'모레' : `${fcstTime}시`
         }</span>
         </li>

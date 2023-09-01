@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-function City({skyValue, fcstValue,uuuValue,rehValue,pcpValue,popValue,ptyValue,fcstDate,fcstTime}) {
-
+function City({skyValue, fcstValue,uuuValue,rehValue,pcpValue,popValue,ptyValue,fcstDate,fcstTime,menu}) {
+// console.log(fcstTime)
+console.log(menu)
   const iconName = (skyValue,ptyValue)=>{
     let skyName = '';
     if(skyValue === '1'){
@@ -35,6 +36,11 @@ function City({skyValue, fcstValue,uuuValue,rehValue,pcpValue,popValue,ptyValue,
         </div>
       </div> */}
       <div className="item-box">
+        <span className="item-header">
+        {
+             menu === 0 ? '오늘' : menu === 1 ? '내일' : '모레'
+        }의 날씨
+        </span>
       <div className="item-container">
         <i className={iconName(skyValue,ptyValue) }></i>
         <Grade>{fcstValue} ℃</Grade>
@@ -58,10 +64,13 @@ function City({skyValue, fcstValue,uuuValue,rehValue,pcpValue,popValue,ptyValue,
 export default City;
 
 const CityItem = styled.li`
-  width: calc(100vw - 40px);
+  width: calc(100vw - 20px);
   box-sizing: border-box;
   margin: 0 auto;
-  border-radius: 7px;
+  padding: 10px;
+  box-sizing: border-box;
+background-color: #fff;
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
   row-gap: 20px;

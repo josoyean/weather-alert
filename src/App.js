@@ -43,10 +43,9 @@ const fetchDataTest = async() =>{
 
 const cityObj=apiData.filter((item)=>{
    return item.fcstDate === menuNum(menu)
-  })
+  });
   const now =new Date();
   const nowHours = String(now.getHours())>=10 ? now.getHours()+'00' : '0'+now.getHours() +'00';
- 
   let  cityUuu,cityPop,cityPcp,cityReh,citySky,cityNowObj,cityTmp,cityNowSky,cityNowPty;
 
  useMemo(()=>{
@@ -92,12 +91,11 @@ const cityObj=apiData.filter((item)=>{
 
 const fetchData = (posts,item) => {
   return(
-    <City key={item} fcstDate = {cityNowObj[0].fcstDate} fcstTime={String(cityNowObj[0].fcstTime).slice(0,2)} fcstValue={cityNowObj[0].fcstValue} ptyValue={cityNowObj[6].fcstValue}  uuuValue={cityNowObj[1].fcstValue} popValue={cityNowObj[7].fcstValue} pcpValue={cityNowObj[9].fcstValue} rehValue={cityNowObj[10].fcstValue} menu={menu} skyValue={cityNowObj[5].fcstValue}></City>
+    <City key={item} menu={menu} fcstDate = {cityNowObj[0].fcstDate} fcstTime={String(cityNowObj[0].fcstTime).slice(0,2)} fcstValue={cityNowObj[0].fcstValue} ptyValue={cityNowObj[6].fcstValue}  uuuValue={cityNowObj[1].fcstValue} popValue={cityNowObj[7].fcstValue} pcpValue={cityNowObj[9].fcstValue} rehValue={cityNowObj[10].fcstValue} menu={menu} skyValue={cityNowObj[5].fcstValue}></City>
     )
 }
 
 const fullWeather = (index) => {
-
   return(
     <WeatherTime weatherIndex={index} cityNowPtyDate = {cityNowPty[index].fcstValue} cityNowSkyDate = {cityNowSky[index].fcstValue} fcstDate = {cityTmp[index].fcstDate} baseDate = {cityTmp[index].baseDate}  key={index} tmpValue={cityTmp[index].fcstValue} fcstTime={String(cityTmp[index].fcstTime).slice(0,2)}></WeatherTime>
     )
