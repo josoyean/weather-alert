@@ -43,7 +43,7 @@ return diffDate
 }
 
   return (
-    <li className={between_date(toDate(fcstDate),toDate(baseDate)) === 0 ? 'nowLable': between_date(toDate(fcstDate),toDate(baseDate))===1 ?'tomorrowLable':between_date(toDate(fcstDate),toDate(baseDate)) ===2 ?'afterTomorrowLable' : ''}>
+    <div className={between_date(toDate(fcstDate),toDate(baseDate)) === 0 ? 'nowLable': between_date(toDate(fcstDate),toDate(baseDate))===1 ?'tomorrowLable':between_date(toDate(fcstDate),toDate(baseDate)) ===2 ?'afterTomorrowLable' : ''}>
      <i className={
     iconName(cityNowSkyDate,cityNowPtyDate)
      }></i>
@@ -51,7 +51,7 @@ return diffDate
       <span className={ weatherIndex === 0 ? 'time now': fcstTime === '00' ?weatherIndex <= 12?'time tomorrow':'time afterTomorrow' : 'time'}>{
         weatherIndex === 0 ? '현재': fcstTime === '00' ?weatherIndex <= 12?'내일':'모레' : `${fcstTime}시`
         }</span>
-        </li>
+        </div>
   )
 }
 
