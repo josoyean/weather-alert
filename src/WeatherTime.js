@@ -24,6 +24,7 @@ const iconName = (citySkyDate,cityPtyDate)=>{
   return name ;
 }
 
+// console.log(menuNum(1))
 const toDate = (date_str)=>{
     var yyyyMMdd = String(date_str);
     var sYear = yyyyMMdd.substring(0,4);

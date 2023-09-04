@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 function City({skyValue, fcstValue,uuuValue,rehValue,pcpValue,popValue,ptyValue,fcstDate,fcstTime,menu}) {
 // console.log(fcstTime)
-console.log(menu)
+// console.log(menu)
   const iconName = (skyValue,ptyValue)=>{
     let skyName = '';
     if(skyValue === '1'){

@@ -1,8 +1,9 @@
+import axios from "axios";
 import React, { useEffect, useMemo, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./App.css";
 import City from "./City";
-
+import Weekend from "./Weekend";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
@@ -14,9 +15,9 @@ function App() {
   const [posts, setPosts] = useState(0);
   const [apiData, setApiData] = useState([]);
   const [apiData1, setApiData1] = useState([]);
+  const [apiData2, setApiData2] = useState([]);
   const [nowData, setNowData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [loading1, setLoading1] = useState(false);
   const [ampm, setAmPm] = useState(false);
 
   const tabClick = (i) => {
@@ -33,39 +34,57 @@ function App() {
     return nowDate;
   };
 
-  const fetchDataTest = async () => {
-    const json = await (
-      await fetch(
-        `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=knxz%2FlyNk0FjzlTCfJjZUPUucLIHmodcfjVN4xS%2FjYX76aaGg8%2FmSWhc1v5iXk4VfTLty9gPewCNeVL83HHlEg%3D%3D&pageNo=1&numOfRows=1000&dataType=JSON&base_date=${menuNum(
-          0
-        )}&base_time=0500&nx=62&ny=127`
-      )
-    ).json();
+  // const fetchDataTest = async () => {
+  //   const json = await (
+  //     await fetch(
+  //       `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=knxz%2FlyNk0FjzlTCfJjZUPUucLIHmodcfjVN4xS%2FjYX76aaGg8%2FmSWhc1v5iXk4VfTLty9gPewCNeVL83HHlEg%3D%3D&pageNo=1&numOfRows=1000&dataType=JSON&base_date=${menuNum(
+  //         0
+  //       )}&base_time=0500&nx=62&ny=127`
+  //     )
+  //   ).json();
 
-    setApiData(json.response.body.items.item);
-    setLoading(true);
+  //   setApiData(json.response.body.items.item);
+  //   setLoading(true);
 
-  };
-  const fetchDataTest1 = async () => {
-    const json = await (
-      await fetch(
-        `https://apis.data.go.kr/1360000/MidFcstInfoService/getMidLandFcst?serviceKey=knxz%2FlyNk0FjzlTCfJjZUPUucLIHmodcfjVN4xS%2FjYX76aaGg8%2FmSWhc1v5iXk4VfTLty9gPewCNeVL83HHlEg%3D%3D&pageNo=1&numOfRows=100&dataType=JSON&regId=11B00000&tmFc=${menuNum(0)}0600`
-      )
-    ).json();
+  // };
+  // const fetchDataTest1 = async () => {
+  //   const json = await (
+  //     await fetch(
+  //       `https://apis.data.go.kr/1360000/MidFcstInfoService/getMidLandFcst?serviceKey=knxz%2FlyNk0FjzlTCfJjZUPUucLIHmodcfjVN4xS%2FjYX76aaGg8%2FmSWhc1v5iXk4VfTLty9gPewCNeVL83HHlEg%3D%3D&pageNo=1&numOfRows=100&dataType=JSON&regId=11B00000&tmFc=${menuNum(0)}0600`
+  //     )
+  //   ).json();
 
-    setApiData1(json.response.body.items.item);
-    setLoading1(true);
-  };
+  //   setApiData1(json.response.body.items.item);
+  //   setLoading1(true);
+  // };
   
+  // useEffect(() => {
+  //   fetchDataTest();
+  // }, []);
+  
+  
+  // useEffect(() => {
+  //   fetchDataTest1();
+  // }, []);
+
   useEffect(() => {
-    fetchDataTest();
+    axios
+      .all([
+        axios.get(`https://apis.data.go.kr/1360000/MidFcstInfoService/getMidLandFcst?serviceKey=knxz%2FlyNk0FjzlTCfJjZUPUucLIHmodcfjVN4xS%2FjYX76aaGg8%2FmSWhc1v5iXk4VfTLty9gPewCNeVL83HHlEg%3D%3D&pageNo=1&numOfRows=100&dataType=JSON&regId=11B00000&tmFc=${menuNum(0)}0600`),
+        axios.get(`https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=knxz%2FlyNk0FjzlTCfJjZUPUucLIHmodcfjVN4xS%2FjYX76aaGg8%2FmSWhc1v5iXk4VfTLty9gPewCNeVL83HHlEg%3D%3D&pageNo=1&numOfRows=1000&dataType=JSON&base_date=${menuNum(0)}&base_time=0500&nx=62&ny=127`),
+        axios.get(`https://apis.data.go.kr/1360000/MidFcstInfoService/getMidTa?serviceKey=knxz%2FlyNk0FjzlTCfJjZUPUucLIHmodcfjVN4xS%2FjYX76aaGg8%2FmSWhc1v5iXk4VfTLty9gPewCNeVL83HHlEg%3D%3D&pageNo=1&numOfRows=100&dataType=JSON&regId=11B10101&tmFc=${menuNum(0)}0600`)
+      ])
+      .then(axios.spread((res1, res2,res3) => 
+   (
+     setApiData1(res1.data.response.body.items.item),
+     setApiData(res2.data.response.body.items.item),
+     setApiData2(res3.data.response.body.items.item),
+     setLoading(true)
+     )
+      )).catch(err => console.log(err));
   }, []);
-  
-  
-  useEffect(() => {
-    fetchDataTest1();
-    console.log(apiData1)
-  }, []);
+
+
   const cityObj = apiData.filter((item) => {
     return item.fcstDate === menuNum(menu);
   });
@@ -166,21 +185,39 @@ function App() {
     );
   };
 
-  const weekendWeather = () => {
-    console.log(apiData1[0])
-    const newArr = [];
-    setAmPm(!ampm)
-for(let i=3; i<8 ;i++){
-  
-  newArr.push(<span key={i}>{
-    ampm == false  ? '안':'녕'
-  }</span>)
+const weekendWeather =() => {
+  console.log(apiData2)
+  const rnSt=[apiData1[0].rnSt3Pm,apiData1[0].rnSt3Am,apiData1[0].rnSt4Pm,apiData1[0].rnSt4Am,apiData1[0].rnSt5Pm,apiData1[0].rnSt5Am,apiData1[0].rnSt6Pm,apiData1[0].rnSt6Am,apiData1[0].rnSt7Pm,apiData1[0].rnSt7Am]
+  const wf=[apiData1[0].wf3Pm,apiData1[0].wf3Am,apiData1[0].wf4Pm,apiData1[0].wf4Am,apiData1[0].wf5Pm,apiData1[0].wf5Am,apiData1[0].wf6Pm,apiData1[0].wf6Am,apiData1[0].wf7Pm,apiData1[0].wf7Am]
+  const ta=[apiData2[0].taMax3,apiData2[0].taMin3,apiData2[0].taMax4,apiData2[0].taMin4,apiData2[0].taMax5,apiData2[0].taMin5,apiData2[0].taMax6,apiData2[0].taMin6,apiData2[0].taMax7,apiData2[0].taMin7]
+  const newArr = [];
+  for(let i=0; i<8 ;i++){
+    if(i<3){
+      newArr.push(
+        <li key={i}>
+             <div>{
+               '안'
+              }</div>
+           <div>{
+             '녕'
+            }</div>
+          </li>
+      )
+    }else{
+      // console.log(menuNum(i))
+        newArr.push(
+          <Weekend taMin={ta[i-2]} taMax={ta[i-3]} weekDay={menuNum(i)} key={i} amValue={rnSt[i-3]} pmValue={rnSt[i-2]} amWf={wf[i-3]} pmWf={wf[i-2]}>
+          </Weekend>
+      )
+      }
+ 
 }
-   return newArr
+ return newArr
   };
+
   return (
     <div className="App">
-      {(loading === false) || (loading1 === false) ? (
+      {(loading === false) ? (
         <span>loading</span>
       ) : (
         <div className="contents">
