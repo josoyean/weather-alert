@@ -71,6 +71,8 @@ function App() {
     cityNowObj,
     cityTmp,
     cityNowSky,
+    morningAfternoon,
+    cityMaxMin,
     cityNowPty;
 
   useMemo(() => {
@@ -118,6 +120,11 @@ function App() {
     cityNowObj = apiData.filter((item) => {
       return item.fcstDate === item.baseDate && item.fcstTime === nowHours;
     });
+
+    morningAfternoon = apiData.filter((item) => {
+  return (item.fcstDate === menuNum(0) && item.fcstTime === '1800') || (item.fcstDate === menuNum(2) && item.fcstTime === '1800') || (item.fcstDate === menuNum(1) && item.fcstTime === '1800' ) || (item.fcstDate === menuNum(0) && item.fcstTime === '0600') ||(item.fcstDate === menuNum(1) && item.fcstTime === '0600') ||(item.fcstDate === menuNum(2) && item.fcstTime === '0600');
+    });
+console.log(morningAfternoon)
   }, [cityObj]);
 
   const fetchData = (posts, item) => {
@@ -156,7 +163,6 @@ function App() {
   };
 
 const weekendWeather =() => {
-  console.log(apiData2)
   const rnSt=[apiData1[0].rnSt3Pm,apiData1[0].rnSt3Am,apiData1[0].rnSt4Pm,apiData1[0].rnSt4Am,apiData1[0].rnSt5Pm,apiData1[0].rnSt5Am,apiData1[0].rnSt6Pm,apiData1[0].rnSt6Am,apiData1[0].rnSt7Pm,apiData1[0].rnSt7Am]
   const wf=[apiData1[0].wf3Pm,apiData1[0].wf3Am,apiData1[0].wf4Pm,apiData1[0].wf4Am,apiData1[0].wf5Pm,apiData1[0].wf5Am,apiData1[0].wf6Pm,apiData1[0].wf6Am,apiData1[0].wf7Pm,apiData1[0].wf7Am]
   const ta=[apiData2[0].taMax3,apiData2[0].taMin3,apiData2[0].taMax4,apiData2[0].taMin4,apiData2[0].taMax5,apiData2[0].taMin5,apiData2[0].taMax6,apiData2[0].taMin6,apiData2[0].taMax7,apiData2[0].taMin7]
@@ -168,6 +174,7 @@ const weekendWeather =() => {
              <div>{
                '안'
               }</div>
+              
            <div>{
              '녕'
             }</div>
