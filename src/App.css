@@ -94,6 +94,7 @@ li {
   font-size: 13px;
   font-style: normal;
 }
+.loading-wrap i,
 .WeatherWrap i,
 .item-container > i {
   display: block;
@@ -116,9 +117,11 @@ li {
   margin-top: 4px;
   height: 35px;
 }
+.loading-wrap i.front,
 i.sun {
   background-image: url(./images/sun.png);
 }
+.loading-wrap i.back,
 i.clouds {
   background-image: url(./images/clouds-3.png);
 }
@@ -191,8 +194,8 @@ i.shower {
   width: calc(100vw - 20px);
   background-color: #fff;
   display: flex;
-    row-gap: 8px;
-    flex-direction: column;
+  row-gap: 8px;
+  flex-direction: column;
   box-sizing: border-box;
 }
 .weekend-weather > li {
@@ -227,29 +230,87 @@ i.shower {
   display: flex;
   flex-direction: column;
 }
-.weekend-weather .day-content span.date{
+.weekend-weather .day-content span.date {
   color: #b0b0b0;
   font-size: 14px;
-
 }
-.weekend-weather .day-content span.day-date{
+.weekend-weather .day-content span.day-date {
   color: #303030;
   font-size: 14px;
-  
 }
-.weekend-weather .max-min-content span.min-num{
+.weekend-weather .max-min-content span.min-num {
   color: #2a74f8;
   font-size: 14px;
   vertical-align: top;
 }
-.weekend-weather .max-min-content span.max-num{
+.weekend-weather .max-min-content span.max-num {
   font-size: 18px;
   color: #dc0100;
   font-weight: bold;
   vertical-align: top;
 }
-.weekend-weather .max-min-content em{
-    font-size: 13px;
-    color: #dbdbdb;
-    vertical-align: top;
+.weekend-weather .max-min-content em {
+  font-size: 13px;
+  color: #dbdbdb;
+  vertical-align: top;
 }
+.loading-wrap{
+  height: calc(100vh - 70px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loading-wrap .loading {
+  position: relative;
+  perspective: 440px;
+  width: 220px;
+  height: 220px;
+}
+.loading-wrap i {
+  width: 220px;
+  height: 220px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.loading-wrap i.front {
+  position: absolute;
+  backface-visibility: hidden;
+  animation: front 2000ms linear  infinite;
+}
+
+.loading-wrap i.back {
+  backface-visibility: hidden;
+  animation: back 2000ms linear infinite;
+}
+
+.loading-wrap:hover i.front {
+  transform: rotateY(180deg);
+}
+.loading-wrap:hover i.back {
+  transform: rotateY(0deg);
+}
+@keyframes front {
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(180deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+  
+}
+
+@keyframes back {
+  0%{
+    transform: rotateY(-180deg);
+  }
+  50%{
+    transform: rotateY(0deg);
+  }
+  100%{
+    transform: rotateY(180deg);
+  }
+} 

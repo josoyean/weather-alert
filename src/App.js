@@ -3,6 +3,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./App.css";
 import City from "./City";
+import Loading from "./Loading";
 import Weekend from "./Weekend";
 // Import Swiper styles
 import "swiper/css";
@@ -34,38 +35,7 @@ function App() {
     return nowDate;
   };
 
-  // const fetchDataTest = async () => {
-  //   const json = await (
-  //     await fetch(
-  //       `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=knxz%2FlyNk0FjzlTCfJjZUPUucLIHmodcfjVN4xS%2FjYX76aaGg8%2FmSWhc1v5iXk4VfTLty9gPewCNeVL83HHlEg%3D%3D&pageNo=1&numOfRows=1000&dataType=JSON&base_date=${menuNum(
-  //         0
-  //       )}&base_time=0500&nx=62&ny=127`
-  //     )
-  //   ).json();
 
-  //   setApiData(json.response.body.items.item);
-  //   setLoading(true);
-
-  // };
-  // const fetchDataTest1 = async () => {
-  //   const json = await (
-  //     await fetch(
-  //       `https://apis.data.go.kr/1360000/MidFcstInfoService/getMidLandFcst?serviceKey=knxz%2FlyNk0FjzlTCfJjZUPUucLIHmodcfjVN4xS%2FjYX76aaGg8%2FmSWhc1v5iXk4VfTLty9gPewCNeVL83HHlEg%3D%3D&pageNo=1&numOfRows=100&dataType=JSON&regId=11B00000&tmFc=${menuNum(0)}0600`
-  //     )
-  //   ).json();
-
-  //   setApiData1(json.response.body.items.item);
-  //   setLoading1(true);
-  // };
-  
-  // useEffect(() => {
-  //   fetchDataTest();
-  // }, []);
-  
-  
-  // useEffect(() => {
-  //   fetchDataTest1();
-  // }, []);
 
   useEffect(() => {
     axios
@@ -218,7 +188,7 @@ const weekendWeather =() => {
   return (
     <div className="App">
       {(loading === false) ? (
-        <span>loading</span>
+       <Loading></Loading>
       ) : (
         <div className="contents">
           <div className={menu === 0 ? "show today-content" : "none"}>
