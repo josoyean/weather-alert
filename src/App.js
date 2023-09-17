@@ -72,10 +72,13 @@ function App() {
     cityTmp,
     cityNowSky,
     morningAfternoon,
-    cityMaxMin,
+    morningAfternoon1,
+    test,
+    maxmin,
     cityNowPty;
 
   useMemo(() => {
+   
     cityTmp = apiData.filter((item) => {
       return (
         item.category === "TMP" &&
@@ -121,10 +124,18 @@ function App() {
       return item.fcstDate === item.baseDate && item.fcstTime === nowHours;
     });
 
-    morningAfternoon = apiData.filter((item) => {
-  return (item.fcstDate === menuNum(0) && item.fcstTime === '1800') || (item.fcstDate === menuNum(2) && item.fcstTime === '1800') || (item.fcstDate === menuNum(1) && item.fcstTime === '1800' ) || (item.fcstDate === menuNum(0) && item.fcstTime === '0600') ||(item.fcstDate === menuNum(1) && item.fcstTime === '0600') ||(item.fcstDate === menuNum(2) && item.fcstTime === '0600');
+    morningAfternoon1 = apiData.filter((item) => {
+  return (item.category === 'POP');
     });
-console.log(morningAfternoon)
+   
+    maxmin = apiData.filter((item) => {
+      return (item.category === 'TMN' || item.category === 'TMX');
+        });
+  
+        morningAfternoon = apiData.filter((item) => {
+          return (item.fcstDate === menuNum(0) && item.fcstTime === '1800') || (item.fcstDate === menuNum(2) && item.fcstTime === '1800') || (item.fcstDate === menuNum(1) && item.fcstTime === '1800' ) || (item.fcstDate === menuNum(0) && item.fcstTime === '0600') ||(item.fcstDate === menuNum(1) && item.fcstTime === '0600') ||(item.fcstDate === menuNum(2) && item.fcstTime === '0600');
+            });
+
   }, [cityObj]);
 
   const fetchData = (posts, item) => {
@@ -161,12 +172,27 @@ console.log(morningAfternoon)
       </SwiperSlide>
     );
   };
+  
+  let wfDay,taDay,minDay,maxDay;
+  useMemo(()=>{
+  wfDay= morningAfternoon.filter((item)=>{
+return (item.category === 'SKY')
+  })
 
+  taDay= morningAfternoon.filter((item)=>{
+    return (item.category === 'POP')
+  })
+ 
+  },[morningAfternoon])
 const weekendWeather =() => {
   const rnSt=[apiData1[0].rnSt3Pm,apiData1[0].rnSt3Am,apiData1[0].rnSt4Pm,apiData1[0].rnSt4Am,apiData1[0].rnSt5Pm,apiData1[0].rnSt5Am,apiData1[0].rnSt6Pm,apiData1[0].rnSt6Am,apiData1[0].rnSt7Pm,apiData1[0].rnSt7Am]
   const wf=[apiData1[0].wf3Pm,apiData1[0].wf3Am,apiData1[0].wf4Pm,apiData1[0].wf4Am,apiData1[0].wf5Pm,apiData1[0].wf5Am,apiData1[0].wf6Pm,apiData1[0].wf6Am,apiData1[0].wf7Pm,apiData1[0].wf7Am]
   const ta=[apiData2[0].taMax3,apiData2[0].taMin3,apiData2[0].taMax4,apiData2[0].taMin4,apiData2[0].taMax5,apiData2[0].taMin5,apiData2[0].taMax6,apiData2[0].taMin6,apiData2[0].taMax7,apiData2[0].taMin7]
   const newArr = [];
+  console.log(morningAfternoon)
+  // console.log(maxmin)
+  console.log(taDay)
+  console.log(wfDay)
   for(let i=0; i<8 ;i++){
     if(i<3){
       newArr.push(

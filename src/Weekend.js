@@ -1,9 +1,6 @@
 import React from "react";
 
 function Weekend({ weekDay, amValue, pmValue, amWf, pmWf ,taMin,taMax}) {
-    console.log(taMax)
-    console.log(taMin)
-    console.log('')
   const iconName = (Weather) => {
     let skyName = "";
     if (Weather === "맑음") {
@@ -12,12 +9,15 @@ function Weekend({ weekDay, amValue, pmValue, amWf, pmWf ,taMin,taMax}) {
       skyName = "cloudy";
     } else if (Weather === "구름많음") {
       skyName = "clouds";
+    }else if (Weather === "흐리고 비") {
+      skyName = "cloudy-rain";
     }
     return skyName;
   };
-
+  
+  console.log(amWf);
   const weekDaySet = (setData) => {
-    return String(setData).substr(4, 2) + "." + String(setData).substr(6, 2);
+    return String(setData).substring(4, 6) + "." + String(setData).substring(6, 8);
   };
   const weekDateSet = (setData) => {
     const weekDate = [

@@ -128,7 +128,9 @@ i.clouds {
 i.cloudy {
   background-image: url(./images/cloudy-4.png);
 }
-
+i.cloudy-rain {
+  background-image: url(./images/light-rain.png);
+}
 i.rain {
   background-image: url(./images/rain.png);
 }
