@@ -73,7 +73,8 @@ function App() {
     cityNowSky,
     morningAfternoon,
     morningAfternoon1,
-    test,
+    cityMin,
+    cityMax,
     maxmin,
     cityNowPty;
 
@@ -128,10 +129,22 @@ function App() {
   return (item.category === 'POP');
     });
    
-    maxmin = apiData.filter((item) => {
-      return (item.category === 'TMN' || item.category === 'TMX');
-        });
+    // maxmin = apiData.filter((item) => {
+    //   return (item.category === 'TMN' || item.category === 'TMX');
+    //     });
   
+        maxmin = apiData.filter((item) => {
+          return (item.category === 'TMP');
+            });
+
+        cityMin = apiData.filter((item) => {
+          return (item.category === 'TMN');
+            });
+
+            cityMax = apiData.filter((item) => {
+              return (item.category === 'TMX');
+                });
+
         morningAfternoon = apiData.filter((item) => {
           return (item.fcstDate === menuNum(0) && item.fcstTime === '1800') || (item.fcstDate === menuNum(2) && item.fcstTime === '1800') || (item.fcstDate === menuNum(1) && item.fcstTime === '1800' ) || (item.fcstDate === menuNum(0) && item.fcstTime === '0600') ||(item.fcstDate === menuNum(1) && item.fcstTime === '0600') ||(item.fcstDate === menuNum(2) && item.fcstTime === '0600');
             });
@@ -172,8 +185,23 @@ function App() {
       </SwiperSlide>
     );
   };
-  
   let wfDay,taDay,minDay,maxDay;
+  const max = (num)=>{
+    maxDay = maxmin.filter((item)=>{
+   return (item.fcstDate === num)
+    })
+
+    return maxDay.map(o => o.fcstValue).reduce((max, curr) => max < curr ? curr : max );
+  }
+  
+  const min = (num)=>{
+    minDay = maxmin.filter((item)=>{
+   return (item.fcstDate === num)
+    })
+    return minDay.map(o => o.fcstValue).reduce((min, curr) => min > curr ? curr : min );    
+  }
+  // reduce 대해 알아보고 그리고 티스토리에 올리기 중요
+  let test =[];
   useMemo(()=>{
   wfDay= morningAfternoon.filter((item)=>{
 return (item.category === 'SKY')
@@ -182,6 +210,12 @@ return (item.category === 'SKY')
   taDay= morningAfternoon.filter((item)=>{
     return (item.category === 'POP')
   })
+
+  for(let i =0;i<3;i++){
+     test.push(max(menuNum(i)));
+     test.push(min(menuNum(i)));
+  }
+console.log('안녕', test)
  
   },[morningAfternoon])
 const weekendWeather =() => {
@@ -189,22 +223,14 @@ const weekendWeather =() => {
   const wf=[apiData1[0].wf3Pm,apiData1[0].wf3Am,apiData1[0].wf4Pm,apiData1[0].wf4Am,apiData1[0].wf5Pm,apiData1[0].wf5Am,apiData1[0].wf6Pm,apiData1[0].wf6Am,apiData1[0].wf7Pm,apiData1[0].wf7Am]
   const ta=[apiData2[0].taMax3,apiData2[0].taMin3,apiData2[0].taMax4,apiData2[0].taMin4,apiData2[0].taMax5,apiData2[0].taMin5,apiData2[0].taMax6,apiData2[0].taMin6,apiData2[0].taMax7,apiData2[0].taMin7]
   const newArr = [];
-  console.log(morningAfternoon)
-  // console.log(maxmin)
-  console.log(taDay)
-  console.log(wfDay)
+
+  console.log(maxmin)
   for(let i=0; i<8 ;i++){
     if(i<3){
       newArr.push(
-        <li key={i}>
-             <div>{
-               '안'
-              }</div>
-              
-           <div>{
-             '녕'
-            }</div>
-          </li>
+        <Weekend  key={i} weekDay={menuNum(i)} amValue={taDay[i*2].fcstValue} pmValue={taDay[i*2+1].fcstValue} pmWf={wfDay[i*2+1].fcstValue} amWf={wfDay[i*2].fcstValue}>
+        </Weekend>
+       
       )
     }else{
       // console.log(menuNum(i))

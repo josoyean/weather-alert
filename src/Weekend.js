@@ -3,11 +3,11 @@ import React from "react";
 function Weekend({ weekDay, amValue, pmValue, amWf, pmWf ,taMin,taMax}) {
   const iconName = (Weather) => {
     let skyName = "";
-    if (Weather === "맑음") {
+    if (Weather === "맑음" || Weather === '1') {
       skyName = "sun";
-    } else if (Weather === "흐림") {
+    } else if (Weather === "흐림" || Weather === "4") {
       skyName = "cloudy";
-    } else if (Weather === "구름많음") {
+    } else if (Weather === "구름많음" || Weather === '3') {
       skyName = "clouds";
     }else if (Weather === "흐리고 비") {
       skyName = "cloudy-rain";
