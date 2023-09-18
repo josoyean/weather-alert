@@ -50,6 +50,7 @@ li {
 .none {
   display: none;
 }
+.tomorrow-content,
 .today-content {
   display: flex;
   flex-direction: column;

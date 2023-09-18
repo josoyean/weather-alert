@@ -186,6 +186,7 @@ function App() {
     );
   };
   let wfDay,taDay,minDay,maxDay;
+  
   const max = (num)=>{
     maxDay = maxmin.filter((item)=>{
    return (item.fcstDate === num)
@@ -198,10 +199,11 @@ function App() {
     minDay = maxmin.filter((item)=>{
    return (item.fcstDate === num)
     })
-    return minDay.map(o => o.fcstValue).reduce((min, curr) => min > curr ? curr : min );    
+
+  return minDay.map(o => o.fcstValue).reduce((min, curr) => min > curr ? curr : min );    
   }
   // reduce 대해 알아보고 그리고 티스토리에 올리기 중요
-  let test =[];
+
   useMemo(()=>{
   wfDay= morningAfternoon.filter((item)=>{
 return (item.category === 'SKY')
@@ -211,35 +213,27 @@ return (item.category === 'SKY')
     return (item.category === 'POP')
   })
 
-  for(let i =0;i<3;i++){
-     test.push(max(menuNum(i)));
-     test.push(min(menuNum(i)));
-  }
-console.log('안녕', test)
- 
-  },[morningAfternoon])
+  
+},[morningAfternoon,maxmin])
 const weekendWeather =() => {
   const rnSt=[apiData1[0].rnSt3Pm,apiData1[0].rnSt3Am,apiData1[0].rnSt4Pm,apiData1[0].rnSt4Am,apiData1[0].rnSt5Pm,apiData1[0].rnSt5Am,apiData1[0].rnSt6Pm,apiData1[0].rnSt6Am,apiData1[0].rnSt7Pm,apiData1[0].rnSt7Am]
   const wf=[apiData1[0].wf3Pm,apiData1[0].wf3Am,apiData1[0].wf4Pm,apiData1[0].wf4Am,apiData1[0].wf5Pm,apiData1[0].wf5Am,apiData1[0].wf6Pm,apiData1[0].wf6Am,apiData1[0].wf7Pm,apiData1[0].wf7Am]
   const ta=[apiData2[0].taMax3,apiData2[0].taMin3,apiData2[0].taMax4,apiData2[0].taMin4,apiData2[0].taMax5,apiData2[0].taMin5,apiData2[0].taMax6,apiData2[0].taMin6,apiData2[0].taMax7,apiData2[0].taMin7]
   const newArr = [];
-
-  console.log(maxmin)
+  
   for(let i=0; i<8 ;i++){
     if(i<3){
       newArr.push(
-        <Weekend  key={i} weekDay={menuNum(i)} amValue={taDay[i*2].fcstValue} pmValue={taDay[i*2+1].fcstValue} pmWf={wfDay[i*2+1].fcstValue} amWf={wfDay[i*2].fcstValue}>
+        <Weekend  key={i} weekDay={menuNum(i)} taMin={min(menuNum(i))} taMax={max(menuNum(i))} amValue={taDay[i*2].fcstValue} pmValue={taDay[i*2+1].fcstValue} pmWf={wfDay[i*2+1].fcstValue} amWf={wfDay[i*2].fcstValue}>
         </Weekend>
        
       )
     }else{
-      // console.log(menuNum(i))
         newArr.push(
           <Weekend taMin={ta[i-2]} taMax={ta[i-3]} weekDay={menuNum(i)} key={i} amValue={rnSt[i-3]} pmValue={rnSt[i-2]} amWf={wf[i-3]} pmWf={wf[i-2]}>
           </Weekend>
       )
       }
- 
 }
  return newArr
   };
@@ -264,18 +258,44 @@ const weekendWeather =() => {
                 })}
               </Swiper>
             </ul>
-            {/* 주간 예보 */}
+         
             <ul className="weekend-weather">
                 {
                   weekendWeather()
                 }
             </ul>
           </div>
-          <div className={menu === 1 ? "show" : "none"}>
-            <ul className="tryWrap"></ul>
+          <div className={menu === 1 ? "show tomorrow-content" : "none"}>
+            <ul className="tryWrap">{
+             
+            }</ul>
+             <ul className="WeatherWrap">
+              <Swiper
+                slidesPerView={3}
+                spaceBetween={15}
+                modules={[Pagination]}
+                className="mySwiper"
+              >
+                {cityTmp.map((item, index) => {
+                  return fullWeather(index);
+                })}
+              </Swiper>
+            </ul>
+         
+            <ul className="weekend-weather">
+                {
+                  weekendWeather()
+                }
+            </ul>
           </div>
           <div className={menu === 2 ? "show" : "none"}>
-            <span>즐겨찾기</span>
+          <ul className="tryWrap"></ul>
+            <ul className="weekend-weather">
+                {
+                  weekendWeather()
+                }
+            </ul>
+      
           </div>
         </div>
       )}
