@@ -15,7 +15,7 @@ function Weekend({ weekDay, amValue, pmValue, amWf, pmWf ,taMin,taMax}) {
     return skyName;
   };
   
-  console.log(amWf);
+  // console.log(amWf);
   const weekDaySet = (setData) => {
     return String(setData).substring(4, 6) + "." + String(setData).substring(6, 8);
   };

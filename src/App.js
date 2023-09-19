@@ -5,6 +5,7 @@ import "./App.css";
 import City from "./City";
 import Loading from "./Loading";
 import Weekend from "./Weekend";
+import FutureWeather  from "./FutureWeather";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
@@ -34,8 +35,6 @@ function App() {
     const nowDate = nowYear + nowMonth + nowDay;
     return nowDate;
   };
-
-
 
   useEffect(() => {
     axios
@@ -127,12 +126,7 @@ function App() {
 
     morningAfternoon1 = apiData.filter((item) => {
   return (item.category === 'POP');
-    });
-   
-    // maxmin = apiData.filter((item) => {
-    //   return (item.category === 'TMN' || item.category === 'TMX');
-    //     });
-  
+    }); 
         maxmin = apiData.filter((item) => {
           return (item.category === 'TMP');
             });
@@ -148,9 +142,7 @@ function App() {
         morningAfternoon = apiData.filter((item) => {
           return (item.fcstDate === menuNum(0) && item.fcstTime === '1800') || (item.fcstDate === menuNum(2) && item.fcstTime === '1800') || (item.fcstDate === menuNum(1) && item.fcstTime === '1800' ) || (item.fcstDate === menuNum(0) && item.fcstTime === '0600') ||(item.fcstDate === menuNum(1) && item.fcstTime === '0600') ||(item.fcstDate === menuNum(2) && item.fcstTime === '0600');
             });
-
   }, [cityObj]);
-
   const fetchData = (posts, item) => {
     return (
       <City
@@ -203,7 +195,6 @@ function App() {
   return minDay.map(o => o.fcstValue).reduce((min, curr) => min > curr ? curr : min );    
   }
   // reduce 대해 알아보고 그리고 티스토리에 올리기 중요
-
   useMemo(()=>{
   wfDay= morningAfternoon.filter((item)=>{
 return (item.category === 'SKY')
@@ -213,7 +204,6 @@ return (item.category === 'SKY')
     return (item.category === 'POP')
   })
 
-  
 },[morningAfternoon,maxmin])
 const weekendWeather =() => {
   const rnSt=[apiData1[0].rnSt3Pm,apiData1[0].rnSt3Am,apiData1[0].rnSt4Pm,apiData1[0].rnSt4Am,apiData1[0].rnSt5Pm,apiData1[0].rnSt5Am,apiData1[0].rnSt6Pm,apiData1[0].rnSt6Am,apiData1[0].rnSt7Pm,apiData1[0].rnSt7Am]
@@ -221,6 +211,7 @@ const weekendWeather =() => {
   const ta=[apiData2[0].taMax3,apiData2[0].taMin3,apiData2[0].taMax4,apiData2[0].taMin4,apiData2[0].taMax5,apiData2[0].taMin5,apiData2[0].taMax6,apiData2[0].taMin6,apiData2[0].taMax7,apiData2[0].taMin7]
   const newArr = [];
   
+  // console.log(taDay[1*2].fcstValue);
   for(let i=0; i<8 ;i++){
     if(i<3){
       newArr.push(
@@ -237,6 +228,10 @@ const weekendWeather =() => {
 }
  return newArr
   };
+
+  const selectWeather = (num) =>{
+    console.log(taDay[num*2]);
+  }
 
   return (
     <div className="App">
@@ -266,9 +261,9 @@ const weekendWeather =() => {
             </ul>
           </div>
           <div className={menu === 1 ? "show tomorrow-content" : "none"}>
-            <ul className="tryWrap">{
-             
-            }</ul>
+            <div className="tryWrap">{
+             <FutureWeather>{selectWeather(menu)}</FutureWeather>
+            }</div>
              <ul className="WeatherWrap">
               <Swiper
                 slidesPerView={3}
