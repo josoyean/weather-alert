@@ -3,11 +3,7 @@ import React from 'react'
 import { styled } from 'styled-components'
 
 function FutureWeather({mainTitle,rainValue,taMin,taMax,iconValue,teValue,pcpValue,uuuValue}) {
-   console.log('pcpValue',pcpValue)
-    // console.log('taMin',taMin)
-    // console.log('taMax',taMax)
-    // console.log('iconValue',iconValue)
-    // console.log('teValue',teValue)
+
 
     const iconName = (Weather) => {
         let skyName = "";

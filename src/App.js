@@ -7,6 +7,7 @@ import Loading from "./Loading";
 import Weekend from "./Weekend";
 import FutureWeather  from "./FutureWeather";
 // Import Swiper styles
+
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
@@ -19,9 +20,7 @@ function App() {
   const [apiData, setApiData] = useState([]);
   const [apiData1, setApiData1] = useState([]);
   const [apiData2, setApiData2] = useState([]);
-  const [nowData, setNowData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [ampm, setAmPm] = useState(false);
 
   const tabClick = (i) => {
     setMenu(i);
