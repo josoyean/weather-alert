@@ -6,6 +6,9 @@ ul,
 li {
   list-style: none;
 }
+em{
+  font-style: normal;
+}
 .contents {
   background-color: #f1f5fe;
 }
@@ -51,6 +54,7 @@ li {
   display: none;
 }
 .tomorrow-content,
+.after-tomorrow,
 .today-content {
   display: flex;
   flex-direction: column;
@@ -68,6 +72,9 @@ li {
   column-gap: 10px;
 }
 
+.tomorrow-content em{
+ font-style: normal;
+}
 .tryWrap {
   box-sizing: border-box;
 }
@@ -95,6 +102,7 @@ li {
   font-size: 13px;
   font-style: normal;
 }
+.temperature-wrap >i,
 .loading-wrap i,
 .WeatherWrap i,
 .item-container > i {
@@ -117,6 +125,10 @@ li {
   width: 35px;
   margin-top: 4px;
   height: 35px;
+}
+.temperature-wrap >i{
+  width: 60px;
+  height: 60px;
 }
 .loading-wrap i.front,
 i.sun {
@@ -141,7 +153,8 @@ i.snow {
 i.shower {
   background-image: url(./images/umbrella.png);
 }
-
+.tomorrow-content .tryWrap,
+.after-tomorrow .tryWrap,
 .WeatherWrap {
   margin: 0 auto;
   width: calc(100vw - 20px);
@@ -150,6 +163,19 @@ i.shower {
 
   padding: 20px 10px;
   box-sizing: border-box;
+}
+.tomorrow-content .tryWrap,
+.after-tomorrow .tryWrap{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.tomorrow-content .tryWrap >li,
+.after-tomorrow .tryWrap >li{
+display: flex;
+display: flex;
+flex-direction: column;
+align-items: center;
 }
 .swiper-slide > div {
   width: 100%;
@@ -317,3 +343,37 @@ i.shower {
     transform: rotateY(180deg);
   }
 } 
+.tomorrow-content .tryWrap .item-box,
+.after-tomorrow .tryWrap .item-box,
+.temperature-wrap{
+  display: flex;
+}
+.temperature-wrap{
+  align-items: center;
+  column-gap: 12px;
+  margin: 7px 0 10px;
+}
+.temperature-wrap > span{
+  font-size: 40px;
+  font-weight: bold;
+}
+.tomorrow-content .tryWrap .item-box,
+.after-tomorrow .tryWrap .item-box{
+  column-gap: 10px;
+  margin-top: 8px;
+}
+.tomorrow-content .tryWrap .item-box .item,
+.after-tomorrow .tryWrap .item-box .item{
+
+/* display: flex;
+flex-direction: column;
+align-items: center; */
+}
+.tomorrow-content em,
+.after-tomorrow em{
+font-size: 16px;
+}
+.tomorrow-content .item-box *,
+.after-tomorrow .item-box *{
+font-size: 13px;
+}

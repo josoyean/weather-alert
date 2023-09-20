@@ -28,13 +28,7 @@ function City({skyValue, fcstValue,uuuValue,rehValue,pcpValue,popValue,ptyValue,
 
   return (
     <CityItem>
-      {/* <div className="item-header">
-        <div className="city-name">
-          <span className="main">{
-            menu === 1 ? '오늘' : menu === 2 ? '내일' : '모레'
-          } 날씨</span>
-        </div>
-      </div> */}
+     
       <div className="item-box">
         <span className="item-header">
         {

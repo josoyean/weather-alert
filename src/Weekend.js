@@ -1,5 +1,5 @@
 import React from "react";
-
+import FutureWeather from "./FutureWeather";
 function Weekend({ weekDay, amValue, pmValue, amWf, pmWf ,taMin,taMax}) {
   const iconName = (Weather) => {
     let skyName = "";
@@ -30,9 +30,9 @@ function Weekend({ weekDay, amValue, pmValue, amWf, pmWf ,taMin,taMax}) {
       "토요일",
     ];
     let date = new Date(
-      String(setData).substr(0, 4),
-      String(setData).substr(4, 2) - 1,
-      String(setData).substr(6, 2)
+      String(setData).substring(0, 4),
+      String(setData).substring(4, 6) - 1,
+      String(setData).substring(6, 8)
     ).getDay();
     return weekDate[date];
   };

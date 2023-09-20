@@ -11,6 +11,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
 import WeatherTime from "./WeatherTime";
+import { keyboard } from "@testing-library/user-event/dist/keyboard";
 const URL = "/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty";
 function App() {
   const [menu, setMenu] = useState(0);
@@ -66,9 +67,12 @@ function App() {
     cityPop,
     cityPcp,
     cityReh,
+    selectReh,
     citySky,
     cityNowObj,
     cityTmp,
+    selectTmp,
+   
     cityNowSky,
     morningAfternoon,
     morningAfternoon1,
@@ -142,6 +146,7 @@ function App() {
         morningAfternoon = apiData.filter((item) => {
           return (item.fcstDate === menuNum(0) && item.fcstTime === '1800') || (item.fcstDate === menuNum(2) && item.fcstTime === '1800') || (item.fcstDate === menuNum(1) && item.fcstTime === '1800' ) || (item.fcstDate === menuNum(0) && item.fcstTime === '0600') ||(item.fcstDate === menuNum(1) && item.fcstTime === '0600') ||(item.fcstDate === menuNum(2) && item.fcstTime === '0600');
             });
+
   }, [cityObj]);
   const fetchData = (posts, item) => {
     return (
@@ -205,6 +210,8 @@ return (item.category === 'SKY')
   })
 
 },[morningAfternoon,maxmin])
+
+
 const weekendWeather =() => {
   const rnSt=[apiData1[0].rnSt3Pm,apiData1[0].rnSt3Am,apiData1[0].rnSt4Pm,apiData1[0].rnSt4Am,apiData1[0].rnSt5Pm,apiData1[0].rnSt5Am,apiData1[0].rnSt6Pm,apiData1[0].rnSt6Am,apiData1[0].rnSt7Pm,apiData1[0].rnSt7Am]
   const wf=[apiData1[0].wf3Pm,apiData1[0].wf3Am,apiData1[0].wf4Pm,apiData1[0].wf4Am,apiData1[0].wf5Pm,apiData1[0].wf5Am,apiData1[0].wf6Pm,apiData1[0].wf6Am,apiData1[0].wf7Pm,apiData1[0].wf7Am]
@@ -230,7 +237,28 @@ const weekendWeather =() => {
   };
 
   const selectWeather = (num) =>{
-    console.log(taDay[num*2]);
+  
+    selectTmp = morningAfternoon.filter((item) => {
+      return (item.category === 'TMP');
+    }); 
+
+   let selectPcp= cityPcp.filter((item) => {
+      return (item.fcstTime === '1800' || item.fcstTime === '0600');
+    }); 
+   
+    let selectUuu= cityUuu.filter((item) => {
+      return (item.fcstTime === '1800' || item.fcstTime === '0600');
+    }); 
+
+    const newArr = [];
+    for(let i=0; i<2 ;i++){
+    
+      newArr.push(
+        <FutureWeather key={i} uuuValue={selectUuu[i].fcstValue} pcpValue={selectPcp[i].fcstValue} mainTitle={i} teValue={selectTmp[num*2+i].fcstValue} rainValue={taDay[num*2+i].fcstValue} iconValue={wfDay[num*2+i].fcstValue} taMin={min(menuNum(num))} taMax={max(menuNum(num))}></FutureWeather>
+        )
+      }
+
+  return newArr
   }
 
   return (
@@ -261,9 +289,7 @@ const weekendWeather =() => {
             </ul>
           </div>
           <div className={menu === 1 ? "show tomorrow-content" : "none"}>
-            <div className="tryWrap">{
-             <FutureWeather>{selectWeather(menu)}</FutureWeather>
-            }</div>
+          <ul className="tryWrap">{ selectWeather(menu)}</ul>
              <ul className="WeatherWrap">
               <Swiper
                 slidesPerView={3}
@@ -283,8 +309,8 @@ const weekendWeather =() => {
                 }
             </ul>
           </div>
-          <div className={menu === 2 ? "show" : "none"}>
-          <ul className="tryWrap"></ul>
+          <div className={menu === 2 ? "show  after-tomorrow" : "none"}>
+          <ul className="tryWrap">{ selectWeather(menu)}</ul>
             <ul className="weekend-weather">
                 {
                   weekendWeather()
