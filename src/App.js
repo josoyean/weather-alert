@@ -15,7 +15,6 @@ import WeatherTime from "./WeatherTime";
 const URL = "/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty";
 function App() {
   const [menu, setMenu] = useState(0);
-  const [posts, setPosts] = useState(0);
   const [apiData, setApiData] = useState([]);
   const [apiData1, setApiData1] = useState([]);
   const [apiData2, setApiData2] = useState([]);
