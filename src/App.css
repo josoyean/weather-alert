@@ -284,13 +284,10 @@ align-items: center;
   vertical-align: top;
 }
 .loading-wrap{
-  height: 100vh;
+  height: calc(100vh - 70px);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 99;
-    background-color: #fff;
-    position: relative;
 }
 .loading-wrap .loading {
   position: relative;

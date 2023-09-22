@@ -3,15 +3,16 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./App.css";
 import City from "./City";
-import FutureWeather from "./FutureWeather";
 import Loading from "./Loading";
 import Weekend from "./Weekend";
+import FutureWeather  from "./FutureWeather";
 // Import Swiper styles
 
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
 import WeatherTime from "./WeatherTime";
+import { keyboard } from "@testing-library/user-event/dist/keyboard";
 const URL = "/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty";
 function App() {
   const [menu, setMenu] = useState(0);
@@ -216,6 +217,7 @@ const weekendWeather =() => {
   const ta=[apiData2[0].taMax3,apiData2[0].taMin3,apiData2[0].taMax4,apiData2[0].taMin4,apiData2[0].taMax5,apiData2[0].taMin5,apiData2[0].taMax6,apiData2[0].taMin6,apiData2[0].taMax7,apiData2[0].taMin7]
   const newArr = [];
   
+  // console.log(taDay[1*2].fcstValue);
   for(let i=0; i<8 ;i++){
     if(i<3){
       newArr.push(
