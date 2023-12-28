@@ -1,8 +1,7 @@
 import React from "react";
-import FutureWeather from "./FutureWeather";
 function Weekend({ weekDay, amValue, pmValue, amWf, pmWf ,taMin,taMax}) {
   const iconName = (Weather) => {
-    let skyName = "";
+    let skyName = "sun";
     if (Weather === "맑음" || Weather === '1') {
       skyName = "sun";
     } else if (Weather === "흐림" || Weather === "4") {
